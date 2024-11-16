@@ -1,0 +1,22 @@
+CalendarDateRefJoin = 
+VAR __MIN_START_DATE = MIN('PBI_Excel_MEDLOG_Join_PL_tbl'[Date Ref])
+VAR __MAX_START_DATE = MAX('PBI_Excel_MEDLOG_Join_PL_tbl'[Date Ref])
+RETURN
+ADDCOLUMNS (
+CALENDAR (__MIN_START_DATE, __MAX_START_DATE),
+"DateAsInteger", FORMAT ( [Date], "YYYYMMDD" ),
+"Year", YEAR ( [Date] ),
+"Monthnumber", FORMAT ( [Date], "MM" ),
+"YearMonthnumber", FORMAT ( [Date], "YYYY/MM" ),
+"YearMonthShort", FORMAT ( [Date], "YYYY/mmm" ),
+"MonthNameShort", FORMAT ( [Date], "mmm" ),
+"MonthNameLong", FORMAT ( [Date], "mmmm" ),
+"Day", FORMAT ( [Date], "d" ),
+"DayOfWeekNumber", WEEKDAY ( [Date] ),
+"DayOfWeek", FORMAT ( [Date], "dddd" ),
+"DayOfWeekShort", FORMAT ( [Date], "ddd" ),
+"WEEKNUM", WEEKNUM ( [Date],  2 ), -- Week start on Mon
+"WEEKNUM  2", FORMAT ( [Date], "YYYY" ) & "_" & WEEKNUM ( [Date],  2 ), -- Week start on Mon
+"Quarter", "Q" & FORMAT ( [Date], "Q" ),
+"YearQuarter", FORMAT ( [Date], "YYYY" ) & "/Q" & FORMAT ( [Date], "Q" )
+)
